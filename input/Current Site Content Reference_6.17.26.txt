@@ -1,0 +1,257 @@
+Current Site Content Reference — lighthousedigitalmedia.net
+
+Pulled directly from the live site on June 17, 2026. Use this as the source
+of truth for copy/structure instead of re-fetching the live site each time.
+Sections marked [GAP — needs content] were not captured and should be
+treated as placeholders, not invented.
+
+
+Site navigation
+
+
+Strategy & Buying → /services
+Custom Dashboards → /dashboards
+Case Studies → /case-studies
+The Team → /team
+Contact Us → /contact
+
+
+Global meta
+
+
+Site title: "Lighthouse Digital Media"
+Meta description (homepage): "Lighthouse Digital Media is a Boston-based
+media agency specializing in promoting products, services, and brands
+through various digital channels and platforms."
+Brand colors (from inline SVG): gold/yellow (#F4D35E, 50% opacity) and
+navy blue (#074F89)
+
+
+
+Homepage (/)
+
+Hero headline: "Digital Media Done Personally"
+
+Hero subhead: At Lighthouse Digital Media we firmly believe that the
+success of advertising campaigns hinges on the expertise and integrity of
+the individuals who drive them forward. We uphold ideals of transparency,
+dependability, collaboration, and empathy, not only in our personal lives
+but also in our professional endeavors.
+
+Capability tags shown: Search / Social media / Video / Programmatic /
+Custom dashboards
+
+Search section (homepage excerpt):
+Manage and expand on your brand visibility across Google and Microsoft
+(Bing). Reach existing and potential customers with responsive messaging
+and strategic keyword bidding to drive consideration, intent, and
+conversion. Employ Shopping and Performance Max opportunities to elevate
+your search presence and eComm goals.
+
+
+Includes Google Partner badge/logo (linked to Google Partners agency page)
+
+
+"Our Approach" section — headline: "Transparency in Every Transaction"
+
+Body: As a digital media and analytics agency, we specialize in delivering
+managed service solutions to mid-market advertisers. Our approach
+seamlessly integrates top-tier talent with cutting-edge technology at every
+phase of the media buying process, guaranteeing punctual campaign launches,
+precise reporting and dashboards, and outstanding campaign performance.
+
+We stay up to date with the new and novel, vetting new platforms and
+opportunities with a focus on transparency, superior performance, and
+utmost brand safety. Client dollars are ultimately positioned to buy the
+impression or click that most benefits the client, with no preferred
+partnerships or deals entering the equation.
+
+"Paid Digital Buying & Execution" subsection:
+With a combined 30+ years in digital planning, buying, and optimization
+across all paid media channels, we specialize in understanding a brand's
+marketing needs and translating them into a cross-channel approach that
+optimizes their budget and available assets.
+
+Your Lighthouse digital team is hands-on-keyboard across your entire plan,
+managing all pre-launch materials, in-platform set-up, and optimizations.
+
+"Data Analytics and Dashboard Design" subsection:
+Data accessibility and transparency are crucial to robust client-agency
+communication and maximizing campaign performance. Clients of Lighthouse
+receive comprehensive performance dashboards customized to their specific
+campaigns and learning objectives.
+
+Partner/client logos shown (logo wall):
+St. Bernards Healthcare, Raytheon, People's Credit Union, Puritan Cape Cod,
+ClearBridge Investments, Standard and Poor's, Block Island Tourism, Brown
+University Health, Boston Medical Center, Science Applications
+International Corporation (SAIC), Providence Warwick CVB, Mountain &
+Sackett, Acme
+
+Testimonial #1 (homepage):
+5 stars — "...Lighthouse team continues to be a trusted programmatic
+partner to TBG+Isovera as they are committed to high-performing campaigns,
+while providing real-time dashboards that are accurate, timely, and
+user-friendly. Perhaps most unique is that Lighthouse is fully transparent
+on fees, allowing us to communicate exact 'working media' to our clients..."
+— Casey Ruggiero, Media Director
+
+
+Services page (/services)
+
+Page headline: "Strategy and Buying"
+Subhead: "We plan, execute, and optimize digital campaigns"
+
+Intro copy:
+Using your marketing goals, challenges, and past performance, our team
+designs an approach that maximizes your available budget and assets,
+reaches your audience, and out-performs your benchmarks. We optimize toward
+the agreed upon performance indicator and report on key learnings
+throughout the campaign.
+
+Tabs/sections: Search, Social Media, Video, Programmatic, Ad Operations
+
+Search
+
+Manage and expand on your brand visibility across Google and Microsoft
+(Bing). Reach existing and potential customers with optimized messaging and
+strategic keyword bidding to drive consideration, intent, and conversion.
+Employ Shopping and Performance Max opportunities to elevate your search
+presence and eComm goals.
+
+Includes:
+
+
+Audit of past campaigns and historical performance
+Strategic plan designed around your site experience, primary KPI, and
+overall marketing goals
+Account structure, including ad copy, asset management, and keyword
+research
+Management of vertical-specific policy needs, account verifications,
+and platform specifics
+
+
+Social Media
+
+Amplify your existing presence on social media with strategically targeted
+ads of all formats. Target existing followers and design lookalike
+audiences based on their social-specific behaviors. At Lighthouse we
+help you:
+
+
+Identify the best platform(s) and audience targeting to achieve your
+post-click goals
+Align messaging with existing social presence for a cohesive ad
+experience
+Incorporate sound and movement and maximize all available ad formats
+Stay up to date with policy updates, platform changes, and new
+opportunities for your brand
+Ensure brand safety using extensive knowledge of platform specifics
+
+
+Video
+
+Video is rapidly becoming an essential component to digital strategy,
+reaching across channels, devices, and mediums. Engage your audience with
+compelling movement and messaging, driving to your website via a click or
+a QR code. At Lighthouse we'll present you with:
+
+
+Cost-effective video opportunities in pre-roll, traditional TV, CTV or
+OTT for your audience and geo
+High-impact options to elevate your messaging, improve recall and drive
+site traffic from TV
+Attribution and retargeting options to maximize the impact of TV across
+other channels
+Detailed performance on content types, providers, and audience engagement
+
+
+(Site includes an embedded video file demonstrating this — /video/video.mp4
+— consider a new hero or supporting video asset for this section)
+
+Programmatic
+
+Access Display, Audio, Video, and Out-of-Home inventory via best-in-class
+demand platforms. Make multiple channels work together to drive prospects
+down funnel, build retargeting pools, and create demand. At Lighthouse
+we offer:
+
+
+Extensive programmatic buying experience within Basis DSP, Google, and
+leading demand-side platforms
+Inventory and tactic selection tailored to your available assets,
+audience, and goals
+Hyperfocus on brand safety and inventory quality, using a combination of
+block-listing, exchange and domain-level optimization, and publisher
+selection
+
+
+Ad Operations
+
+Effective optimization of your campaigns and in-depth analysis of your
+data, to help you make informed decisions for your brand. At Lighthouse
+we pride ourselves on:
+
+
+Establishing a learning agenda during the planning phase, to align on
+test-and-learn opportunities
+Focusing optimization strategy around a primary KPI, while incorporating
+secondary and macro-level goals
+Providing consistent and relevant insights into your campaign
+performance and audience engagement
+
+
+Testimonial #2 (services page):
+5 stars — "With retail changing so drastically during Covid, we decided to
+outsource our digital media buying efforts in hopes of finding trusted
+experts in the retail space. Fortunately for us, we found Lighthouse
+Digital Media and have been working with them ever since. The team is
+smart, caring, and collaborative, and they've helped us grow our business
+for three straight years."
+— Nick Sackett, President (Acme)
+
+
+Pages not yet captured — [GAP — needs content]
+
+
+/dashboards (Custom Dashboards) — not fetched yet; homepage references
+"comprehensive performance dashboards customized to specific campaigns
+and learning objectives" but full page content is unknown
+/case-studies — not fetched yet
+/team — not fetched yet; bios/headshots/titles unknown
+/contact — not fetched yet beyond footer contact info below
+
+
+Action for Cowork build: placeholder these pages with clear "content
+pending" structure rather than inventing case study results, team bios, or
+dashboard specifics. Flag for Sean to supply real copy before launch.
+
+
+Footer / contact info
+
+
+Phone: +1 (617) 270-8228
+Email: contact@lighthousedigitalmedia.net
+LinkedIn: https://www.linkedin.com/company/lighthouse-digital-media-net/about/
+Footer links: Cookie Settings, Terms of Service, Privacy Notice, Login
+Copyright: © 2024 Lighthouse Digital Media (note: outdated year, update
+to current year on rebuild)
+
+
+Note on location: Footer/meta description says "Boston-based," though
+Sean's own location context is Haddonfield/Philadelphia area — clarify
+whether to keep "Boston-based" framing or update.
+
+
+Things to decide before/during build
+
+
+Confirm final service taxonomy — site currently lists 5 tabs (Search,
+Social, Video, Programmatic, Ad Operations) but homepage capability tags
+show a slightly different 5 (Search, Social, Video, Programmatic, Custom
+dashboards) — reconcile into one consistent IA.
+Decide whether to carry over the full client/partner logo wall as-is or
+refresh it.
+Decide whether both testimonials carry over or new ones are preferred.
+Confirm Google Partner badge status is still current/valid to display.
+"© 2024" needs updating; confirm location language (Boston vs. broader).

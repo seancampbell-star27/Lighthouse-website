@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContentPending from '../components/ContentPending.astro';
+
+const features = [
+  {
+    title: 'Built around your KPIs',
+    body:
+      'Dashboards are customized to each campaign and learning objective, so the metrics that matter to your business are front and center.',
+  },
+  {
+    title: 'Accurate and timely',
+    body:
+      'Near real-time data you can trust, refreshed automatically so reporting conversations start from the same numbers.',
+  },
+  {
+    title: 'Transparent by default',
+    body:
+      'Working media, fees, and pacing are clearly separated — no black boxes between your spend and your results.',
+  },
+  {
+    title: 'Cross-channel in one view',
+    body:
+      'Search, social, video, and programmatic performance unified, so you can compare channels and reallocate with confidence.',
+  },
+];
+---
+
+<BaseLayout
+  title="Custom Dashboards"
+  description="Comprehensive, custom performance dashboards built around your campaigns and learning objectives — accurate, timely, and transparent."
+>
+  <PageHero
+    eyebrow="Data & analytics"
+    title="Custom dashboards built around your goals"
+    subtitle="Data accessibility and transparency are crucial to strong client-agency communication and maximizing performance. Every Lighthouse client receives comprehensive dashboards tailored to their specific campaigns and learning objectives."
+  />
+
+  <section class="section">
+    <div class="container">
+      <ContentPending note="Full /dashboards detail (sample screenshots, tooling, embed examples) was not captured from the live site. Add real dashboard visuals and any platform names (e.g. Looker Studio) before launch." />
+      <div class="grid-features">
+        {features.map((f) => (
+          <div class="card reveal">
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="container cta-inner reveal">
+      <h2>Want to see a sample dashboard?</h2>
+      <p class="lede">We&rsquo;ll walk you through how we&rsquo;d report on your campaigns.</p>
+      <a href="/contact" class="btn btn--primary">Request a walkthrough</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .grid-features h3 {
+    color: var(--navy);
+  }
+  .cta-band {
+    background: linear-gradient(120deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+  }
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+  }
+  .cta-inner h2 {
+    color: var(--white);
+  }
+  .cta-inner .lede {
+    color: rgba(255, 255, 255, 0.85);
+    margin-inline: auto;
+    margin-bottom: 1.75rem;
+  }
+</style>

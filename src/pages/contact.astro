@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../config/site';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Lighthouse Digital Media. Tell us your goals and we'll show you the cross-channel approach to reach them."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Let’s start a conversation"
+    subtitle="Tell us a bit about your brand and your goals. We’ll get back to you within one business day."
+  />
+
+  <section class="section">
+    <div class="container contact-grid">
+      <form
+        class="contact-form card"
+        method="POST"
+        action="/api/contact"
+        aria-describedby="form-status"
+      >
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization" />
+        </div>
+        <div class="field">
+          <label for="message">How can we help?</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+
+        <!-- Honeypot anti-spam: real users leave this empty -->
+        <div class="hp" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <button type="submit" class="btn btn--primary">Send message</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <aside class="contact-details">
+        <h2>Reach us directly</h2>
+        <ul>
+          <li>
+            <span class="label">Phone</span>
+            <a href={SITE.phoneHref}>{SITE.phone}</a>
+          </li>
+          <li>
+            <span class="label">Email</span>
+            <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          </li>
+          <li>
+            <span class="label">LinkedIn</span>
+            <a href={SITE.linkedin} target="_blank" rel="noopener">Follow us ↗</a>
+          </li>
+          <li>
+            <span class="label">Location</span>
+            <span>{SITE.locality}, {SITE.region}</span>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .contact-form {
+    display: grid;
+    gap: 1.1rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  input,
+  textarea {
+    font: inherit;
+    color: var(--ink);
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    width: 100%;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(7, 79, 137, 0.12);
+  }
+  textarea {
+    resize: vertical;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .contact-form .btn {
+    justify-self: start;
+  }
+  .form-status {
+    margin: 0;
+    font-size: 0.92rem;
+  }
+  .form-status.is-error {
+    color: #a32d2d;
+  }
+  .form-status.is-success {
+    color: #0f6e56;
+  }
+
+  .contact-details h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .contact-details ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.1rem;
+  }
+  .contact-details .label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.15rem;
+  }
+
+  @media (max-width: 760px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector('.contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!status) return;
+    status.className = 'form-status';
+    status.textContent = 'Sending…';
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        form.reset();
+        status.textContent = 'Thanks — your message is on its way. We’ll reply within one business day.';
+        status.classList.add('is-success');
+      } else {
+        throw new Error('Bad response');
+      }
+    } catch {
+      status.textContent =
+        'Sorry, something went wrong. Please email contact@lighthousedigitalmedia.net directly.';
+      status.classList.add('is-error');
+    }
+  });
+</script>

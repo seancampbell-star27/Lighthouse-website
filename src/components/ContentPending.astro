@@ -1,0 +1,24 @@
+---
+// Visible flag for placeholder content. Remove the instances once real copy
+// is supplied. Safe to leave in dev; consider hiding in production via env.
+interface Props {
+  note: string;
+}
+const { note } = Astro.props;
+---
+
+<aside class="content-pending" role="note">
+  <strong>Content pending —</strong> {note}
+</aside>
+
+<style>
+  .content-pending {
+    background: rgba(244, 211, 94, 0.18);
+    border: 1px dashed #c9a227;
+    border-radius: var(--radius-sm);
+    color: #6b5410;
+    padding: 0.85rem 1.1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+</style>

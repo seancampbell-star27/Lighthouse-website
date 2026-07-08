@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContentPending from '../components/ContentPending.astro';
+
+// Placeholder slots only — do NOT publish invented results. Replace each
+// card with a real, approved case study (client, challenge, approach, result).
+const placeholders = [
+  { sector: 'Healthcare', note: 'Client, challenge, and approved results pending' },
+  { sector: 'Financial services', note: 'Client, challenge, and approved results pending' },
+  { sector: 'Travel & tourism', note: 'Client, challenge, and approved results pending' },
+];
+---
+
+<BaseLayout
+  title="Case Studies"
+  description="Real campaigns, real results. Case studies from Lighthouse Digital Media across healthcare, financial services, travel, and more."
+>
+  <PageHero
+    eyebrow="Our work"
+    title="Campaigns that move the numbers"
+    subtitle="A look at how we plan, buy, and optimize for mid-market brands across industries."
+  />
+
+  <section class="section">
+    <div class="container">
+      <ContentPending note="No case study content was captured from the live site. These are empty slots — supply real client names, challenges, tactics, and approved metrics. Do not publish placeholder results." />
+      <div class="grid-cases">
+        {placeholders.map((p) => (
+          <article class="card case-card reveal">
+            <span class="case-tag">{p.sector}</span>
+            <h3>Case study title</h3>
+            <p class="case-note">{p.note}</p>
+            <span class="card-link">Read the case study →</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="container cta-inner reveal">
+      <h2>Could your brand be next?</h2>
+      <p class="lede">Let&rsquo;s talk about the results you&rsquo;re aiming for.</p>
+      <a href="/contact" class="btn btn--primary">Start a conversation</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .grid-cases {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .case-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .case-tag {
+    align-self: flex-start;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: rgba(7, 79, 137, 0.08);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    margin-bottom: 0.9rem;
+  }
+  .case-card h3 {
+    color: var(--navy);
+  }
+  .case-note {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+  .card-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+  }
+  .cta-band {
+    background: linear-gradient(120deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+  }
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+  }
+  .cta-inner h2 {
+    color: var(--white);
+  }
+  .cta-inner .lede {
+    color: rgba(255, 255, 255, 0.85);
+    margin-inline: auto;
+    margin-bottom: 1.75rem;
+  }
+</style>

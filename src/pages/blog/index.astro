@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Blog"
+  description="Insights on digital media buying, analytics, and transparent campaign management from the team at Lighthouse Digital Media."
+>
+  <PageHero
+    eyebrow="Insights"
+    title="From the Lighthouse team"
+    subtitle="Practical perspective on planning, buying, and measuring digital campaigns."
+  />
+
+  <section class="section">
+    <div class="container">
+      {posts.length === 0 ? (
+        <p class="empty">No posts yet — check back soon.</p>
+      ) : (
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li class="reveal">
+              <a href={`/blog/${post.slug}/`} class="post-card card">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {fmt(post.data.pubDate)}
+                </time>
+                <h2>{post.data.title}</h2>
+                <p>{post.data.description}</p>
+                <span class="card-link">Read more →</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .post-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .post-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+  }
+  .post-card time {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .post-card h2 {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin: 0.5rem 0;
+  }
+  .post-card p {
+    color: var(--body);
+    font-size: 0.97rem;
+  }
+  .card-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+  }
+  .empty {
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+</style>

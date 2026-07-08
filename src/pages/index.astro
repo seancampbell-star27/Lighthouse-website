@@ -1,0 +1,457 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site';
+
+const capabilities = ['Search', 'Social', 'Video', 'Programmatic', 'Custom Dashboards'];
+
+const services = [
+  {
+    title: 'Search',
+    href: '/services#search',
+    body:
+      'Expand visibility across Google and Microsoft (Bing) with responsive messaging and strategic keyword bidding — plus Shopping and Performance Max to drive intent and conversion.',
+  },
+  {
+    title: 'Social',
+    href: '/services#social',
+    body:
+      'Amplify your social presence with targeted ads across every format. Reach existing followers and build lookalike audiences from real social behavior.',
+  },
+  {
+    title: 'Video',
+    href: '/services#video',
+    body:
+      'Reach audiences across pre-roll, CTV, and OTT with high-impact creative — paired with attribution and retargeting to extend TV across every channel.',
+  },
+  {
+    title: 'Programmatic',
+    href: '/services#programmatic',
+    body:
+      'Access Display, Audio, Video, and Out-of-Home inventory through best-in-class DSPs, with a relentless focus on brand safety and inventory quality.',
+  },
+];
+
+// Decision (Sean, 6/17/26): carry over the client logo wall as-is.
+const clients = [
+  'St. Bernards Healthcare', 'Raytheon', "People's Credit Union",
+  'Puritan Cape Cod', 'ClearBridge Investments', 'Standard & Poor’s',
+  'Block Island Tourism', 'Brown University Health', 'Boston Medical Center',
+  'SAIC', 'Providence Warwick CVB', 'Mountain & Sackett',
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${SITE.url}/#organization`,
+  name: SITE.legalName,
+  alternateName: SITE.name,
+  url: SITE.url,
+  description: SITE.description,
+  telephone: SITE.phone,
+  email: SITE.email,
+  image: `${SITE.url}/images/lighthouse-logo.jpg`,
+  logo: `${SITE.url}/images/lighthouse-logo.jpg`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: SITE.locality,
+    addressRegion: SITE.region,
+    addressCountry: SITE.country,
+  },
+  areaServed: 'US',
+  sameAs: [SITE.linkedin],
+  knowsAbout: [
+    'Paid search advertising', 'Paid social advertising', 'Programmatic media buying',
+    'Video and CTV advertising', 'Campaign analytics and dashboards',
+  ],
+};
+---
+
+<BaseLayout
+  title="Digital Media Done Personally"
+  description={SITE.description}
+  jsonLd={jsonLd}
+>
+  <!-- ============== HERO ============== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Boston-based digital media agency</span>
+        <h1>Digital media,<br />done personally.</h1>
+        <p class="lede">
+          Great campaigns come down to the people behind them. We plan, buy, and
+          optimize across every paid channel — with the transparency, reporting,
+          and hands-on partnership mid-market brands deserve.
+        </p>
+        <div class="hero-actions">
+          <a href="/contact" class="btn btn--primary">Start a conversation</a>
+          <a href="/services" class="btn btn--ghost">See what we do</a>
+        </div>
+        <ul class="capabilities" aria-label="Core capabilities">
+          {capabilities.map((c) => <li>{c}</li>)}
+        </ul>
+      </div>
+    </div>
+    <img
+      src="/images/logo-mark.png"
+      alt=""
+      class="hero-mark"
+      width="512"
+      height="512"
+      loading="eager"
+      decoding="async"
+      aria-hidden="true"
+    />
+  </section>
+
+  <!-- ============== APPROACH ============== -->
+  <section class="section section--tint">
+    <div class="container approach reveal">
+      <div class="approach-head">
+        <span class="eyebrow">Our approach</span>
+        <h2>Transparency in every transaction</h2>
+      </div>
+      <div class="approach-body">
+        <p>
+          We deliver managed-service media for mid-market advertisers, pairing
+          top-tier talent with best-in-class technology at every phase of the
+          buy. The result: on-time launches, precise reporting, and campaigns
+          built to outperform.
+        </p>
+        <p>
+          We vet new platforms with a focus on performance and brand safety, and
+          every client dollar buys the impression or click that benefits the
+          client most — with no preferred partnerships or hidden deals in the
+          equation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SERVICES ============== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Strategy &amp; buying</span>
+        <h2>Cross-channel media, managed end to end</h2>
+        <p class="lede">
+          With a combined 30+ years in digital planning, buying, and
+          optimization, we translate your marketing goals into a coordinated plan
+          — and our team stays hands-on-keyboard across all of it.
+        </p>
+      </div>
+
+      <div class="grid-services">
+        {services.map((s) => (
+          <a href={s.href} class="card service-card reveal">
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            <span class="card-link">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== DASHBOARDS ============== -->
+  <section class="section section--navy">
+    <div class="container dash reveal">
+      <div class="dash-copy">
+        <span class="eyebrow">Data &amp; analytics</span>
+        <h2>Dashboards built around your goals</h2>
+        <p>
+          Data accessibility drives strong client-agency communication and better
+          performance. Every Lighthouse client gets comprehensive, custom
+          dashboards mapped to their campaigns and learning objectives — accurate,
+          timely, and easy to read.
+        </p>
+        <a href="/dashboards" class="btn btn--ghost">Explore custom dashboards</a>
+      </div>
+      <div class="dash-stats">
+        <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Years combined buying experience</span></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Fee transparency on working media</span></div>
+        <div class="stat"><span class="stat-num">All</span><span class="stat-label">Paid channels under one team</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CLIENTS ============== -->
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section-head section-head--center reveal">
+        <span class="eyebrow">Trusted by</span>
+        <h2>Brands that partner with Lighthouse</h2>
+      </div>
+      <ul class="logo-wall reveal" aria-label="Client and partner organizations">
+        {clients.map((name) => <li>{name}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============== TESTIMONIAL ============== -->
+  <section class="section">
+    <div class="container">
+      <figure class="quote reveal">
+        <div class="stars" aria-label="Five out of five stars">★★★★★</div>
+        <blockquote>
+          The Lighthouse team continues to be a trusted programmatic partner —
+          committed to high-performing campaigns while providing real-time
+          dashboards that are accurate, timely, and user-friendly. Perhaps most
+          unique is that Lighthouse is fully transparent on fees, allowing us to
+          communicate exact &ldquo;working media&rdquo; to our clients.
+        </blockquote>
+        <figcaption>
+          <strong>Casey Ruggiero</strong>
+          <span>Media Director, TBG+Isovera</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============== CTA ============== -->
+  <section class="section cta-band">
+    <div class="container cta-inner reveal">
+      <h2>Let&rsquo;s build a smarter media plan.</h2>
+      <p class="lede">
+        Tell us your goals and we&rsquo;ll show you the cross-channel approach to
+        reach them.
+      </p>
+      <a href="/contact" class="btn btn--primary">Get in touch</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(1100px 480px at 78% -8%, rgba(244, 211, 94, 0.22), transparent 60%),
+      linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background: var(--line);
+  }
+  .hero-inner {
+    padding-block: clamp(3.5rem, 2rem + 7vw, 7rem);
+  }
+  .hero-copy {
+    max-width: 760px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-mark {
+    position: absolute;
+    right: clamp(-6rem, -2vw, 2rem);
+    bottom: -18%;
+    width: clamp(280px, 32vw, 460px);
+    height: auto;
+    opacity: 0.07;
+    pointer-events: none;
+    user-select: none;
+  }
+  @media (max-width: 800px) {
+    .hero-mark {
+      display: none;
+    }
+  }
+  .hero h1 {
+    margin-top: 0.4rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.75rem;
+  }
+  .capabilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 2.25rem 0 0;
+  }
+  .capabilities li {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    box-shadow: var(--shadow);
+  }
+
+  /* Approach */
+  .approach {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .approach-head h2 {
+    margin: 0;
+  }
+
+  /* Section heads */
+  .section-head {
+    max-width: 60ch;
+    margin-bottom: 2.5rem;
+  }
+  .section-head--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  /* Services grid */
+  .grid-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+  .service-card {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .service-card h3 {
+    color: var(--navy);
+  }
+  .service-card p {
+    color: var(--body);
+    font-size: 0.98rem;
+  }
+  .card-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-weight: 600;
+    color: var(--navy);
+    font-size: 0.95rem;
+  }
+  .service-card:hover .card-link {
+    text-decoration: underline;
+  }
+
+  /* Dashboards */
+  .dash {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .dash-stats {
+    display: grid;
+    gap: 1rem;
+  }
+  .stat {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-num {
+    font-family: var(--ff-serif);
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.9rem;
+    margin-top: 0.35rem;
+  }
+
+  /* Logo wall */
+  .logo-wall {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .logo-wall li {
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--navy-dark);
+    min-height: 92px;
+    transition: background 0.2s ease;
+  }
+  .logo-wall li:hover {
+    background: var(--surface-2);
+  }
+
+  /* Testimonial */
+  .quote {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .stars {
+    color: var(--gold);
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+  .quote blockquote {
+    font-family: var(--ff-serif);
+    font-size: clamp(1.25rem, 1.1rem + 1vw, 1.7rem);
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 1.5rem;
+  }
+  .quote figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .quote figcaption strong {
+    color: var(--ink);
+  }
+  .quote figcaption span {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  /* CTA */
+  .cta-band {
+    background: linear-gradient(120deg, var(--navy) 0%, var(--navy-dark) 100%);
+    color: var(--white);
+  }
+  .cta-inner {
+    text-align: center;
+    max-width: 640px;
+  }
+  .cta-inner h2 {
+    color: var(--white);
+  }
+  .cta-inner .lede {
+    color: rgba(255, 255, 255, 0.85);
+    margin-inline: auto;
+    margin-bottom: 1.75rem;
+  }
+
+  @media (max-width: 800px) {
+    .approach,
+    .dash {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

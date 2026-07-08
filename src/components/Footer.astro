@@ -1,0 +1,126 @@
+---
+import { SITE, NAV } from '../config/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <p class="footer-name">{SITE.name}</p>
+      <p class="footer-tag">
+        Digital media done personally — managed search, social, video, and
+        programmatic with transparent reporting.
+      </p>
+      <a href={SITE.linkedin} class="footer-social" target="_blank" rel="noopener">
+        LinkedIn ↗
+      </a>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <h2>Explore</h2>
+      <ul>
+        {NAV.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="footer-contact">
+      <h2>Contact</h2>
+      <ul>
+        <li><a href={SITE.phoneHref}>{SITE.phone}</a></li>
+        <li><a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+        <li class="footer-loc">{SITE.locality}, {SITE.region}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <p>© {year} {SITE.legalName}. All rights reserved.</p>
+    <ul class="footer-legal">
+      <!-- TODO: link real policy pages before launch -->
+      <li><a href="/privacy">Privacy Notice</a></li>
+      <li><a href="/terms">Terms of Service</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--navy-deep);
+    color: rgba(255, 255, 255, 0.7);
+    padding-top: clamp(3rem, 2rem + 3vw, 4.5rem);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .footer-name {
+    font-family: var(--ff-serif);
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .footer-tag {
+    max-width: 38ch;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  .footer-social {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .site-footer h2 {
+    font-family: var(--ff-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .site-footer a {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+  }
+  .site-footer a:hover {
+    color: var(--white);
+  }
+  .footer-loc {
+    font-size: 0.95rem;
+  }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    margin-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.85rem;
+  }
+  .footer-bottom p {
+    margin: 0;
+  }
+  .footer-legal {
+    flex-direction: row !important;
+    gap: 1.5rem !important;
+  }
+  @media (max-width: 760px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

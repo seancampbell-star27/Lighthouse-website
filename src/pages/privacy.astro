@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContentPending from '../components/ContentPending.astro';
+---
+
+<BaseLayout
+  title="Privacy Notice"
+  description="Privacy Notice for Lighthouse Digital Media LLC."
+>
+  <PageHero eyebrow="Legal" title="Privacy Notice" />
+  <section class="section">
+    <div class="container article">
+      <ContentPending note="Placeholder legal text. Replace with your reviewed Privacy Notice (data collected, cookies, third parties, contact for requests) before launch." />
+      <p>
+        Lighthouse Digital Media LLC respects your privacy. This notice will
+        describe what information we collect, how we use it, and your choices.
+      </p>
+      <p>Final policy language is pending review.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article { max-width: 720px; }
+  .article p { line-height: 1.75; }
+</style>

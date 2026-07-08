@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ContentPending from '../components/ContentPending.astro';
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Terms of Service for Lighthouse Digital Media LLC."
+>
+  <PageHero eyebrow="Legal" title="Terms of Service" />
+  <section class="section">
+    <div class="container article">
+      <ContentPending note="Placeholder legal text. Replace with your reviewed Terms of Service before launch." />
+      <p>
+        These Terms of Service govern your use of the Lighthouse Digital Media
+        website. Final terms are pending review.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .article { max-width: 720px; }
+  .article p { line-height: 1.75; }
+</style>
