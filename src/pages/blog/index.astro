@@ -29,7 +29,7 @@ const fmt = (d: Date) =>
         <ul class="post-list">
           {posts.map((post) => (
             <li class="reveal">
-              <a href={`/blog/${post.slug}/`} class="post-card card">
+              <a href={`/blog/${post.id}/`} class="post-card card">
                 <time datetime={post.data.pubDate.toISOString()}>
                   {fmt(post.data.pubDate)}
                 </time>

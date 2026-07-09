@@ -1,9 +1,10 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
-// Markdown-based blog. Structure is CMS-ready: swap the loader later without
-// touching templates that consume `getCollection('blog')`.
+// Markdown-based blog (Astro 5 content layer). Swap the loader later for a
+// CMS without touching templates that consume `getCollection('blog')`.
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

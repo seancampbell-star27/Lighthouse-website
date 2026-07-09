@@ -7,7 +7,7 @@
 
 ## 1. Current state
 
-- **Framework:** Astro 4 (static output) + `@astrojs/sitemap`. See §6 for planned upgrade.
+- **Framework:** Astro 5 (static output) + `@astrojs/sitemap`; self-hosted fonts via Fontsource.
 - **Hosting:** Cloudflare **Workers** project (NOT classic Pages — this matters, see §4)
   named `lighthouse-website`, Git-connected to GitHub `seancampbell-star27/Lighthouse-website`,
   production branch `main`.
@@ -82,19 +82,19 @@ favicon/OG card generated from the logo mark; navy `#074F89` / gold `#F4D35E`.
 
 ## 6. Recommended pre-launch work (no new content required)
 
-- [ ] **Astro 4 → 5 upgrade** — breaking changes in content collections API
+- [x] **Astro 4 → 5 upgrade** (done 7/9/26) — breaking changes in content collections API
       (`src/content/config.ts` and blog templates). Follow the official v5
       migration guide; verify blog index + post pages after.
-- [ ] **Worker hardening** — add security headers (CSP, X-Content-Type-Options,
+- [x] **Worker hardening** (done 7/9/26) — add security headers (CSP, X-Content-Type-Options,
       X-Frame-Options, Referrer-Policy), cache headers for `/_astro/*` hashed
       assets, and `X-Robots-Tag: noindex` when the request host ends in
       `workers.dev` (prevents staging being indexed; must NOT apply to the
       production domain).
-- [ ] **Self-host fonts** — Inter + Fraunces currently load from Google Fonts
+- [x] **Self-host fonts** (done 7/9/26, via Fontsource) — Inter + Fraunces currently load from Google Fonts
       (render-blocking, extra connection). Download WOFF2 subsets, serve from
       `public/fonts/`, add `@font-face` with `font-display: swap`, remove the
       Google Fonts links from BaseLayout.
-- [ ] **favicon.ico fallback** at site root for legacy crawlers/tools.
+- [x] **favicon.ico fallback** (done 7/9/26) at site root for legacy crawlers/tools.
 - [ ] **RSS feed** for the blog (`@astrojs/rss`) — nice-to-have.
 - [ ] **Lighthouse/CWV audit** on the staging URL once the above land.
 
@@ -123,3 +123,6 @@ favicon/OG card generated from the logo mark; navy `#074F89` / gold `#F4D35E`.
   initial commit; diagnosed empty GitHub repo; Sean pushed; discovered Workers
   (not Pages) deployment ignored `functions/` → migrated contact API to
   `worker/index.js` + `wrangler.jsonc`; staging verified live.
+- **7/9/26 (Fable, cont.):** Astro 5 upgrade (content layer API), self-hosted
+  Inter/Fraunces via Fontsource, Worker security/cache/noindex headers,
+  favicon.ico. All verified: 11 pages build clean.

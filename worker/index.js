@@ -63,6 +63,20 @@ async function handleContact(request, env) {
   return json({ ok: true });
 }
 
+const SECURITY_HEADERS = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+  'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  // Astro inlines small scripts/styles, so 'unsafe-inline' is required.
+  'Content-Security-Policy':
+    "default-src 'self'; script-src 'self' 'unsafe-inline'; " +
+    "style-src 'self' 'unsafe-inline'; img-src 'self' data:; " +
+    "font-src 'self'; connect-src 'self'; frame-ancestors 'none'; " +
+    "base-uri 'self'; form-action 'self'",
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -73,6 +87,25 @@ export default {
     }
 
     // Everything else: serve the static site (dist/).
-    return env.ASSETS.fetch(request);
+    const asset = await env.ASSETS.fetch(request);
+    const res = new Response(asset.body, asset);
+    const type = res.headers.get('content-type') || '';
+
+    if (type.includes('text/html')) {
+      for (const [k, v] of Object.entries(SECURITY_HEADERS)) res.headers.set(k, v);
+    }
+
+    // Hashed build assets are immutable — cache aggressively.
+    if (url.pathname.startsWith('/_astro/')) {
+      res.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+
+    // Keep the staging host (workers.dev) out of search indexes.
+    // Does NOT apply to the production custom domain.
+    if (url.hostname.endsWith('.workers.dev')) {
+      res.headers.set('X-Robots-Tag', 'noindex');
+    }
+
+    return res;
   },
 };
