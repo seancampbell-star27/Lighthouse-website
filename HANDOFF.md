@@ -95,7 +95,7 @@ favicon/OG card generated from the logo mark; navy `#074F89` / gold `#F4D35E`.
       `public/fonts/`, add `@font-face` with `font-display: swap`, remove the
       Google Fonts links from BaseLayout.
 - [x] **favicon.ico fallback** (done 7/9/26) at site root for legacy crawlers/tools.
-- [ ] **RSS feed** for the blog (`@astrojs/rss`) — nice-to-have.
+- [x] **RSS feed** (done 7/9/26) — live at `/rss.xml` with head autodiscovery link.
 - [ ] **Lighthouse/CWV audit** on the staging URL once the above land.
 
 ## 7. Launch runbook (when Sean says go)

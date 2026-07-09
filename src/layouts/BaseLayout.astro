@@ -37,6 +37,12 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.name} — Blog`}
+      href="/rss.xml"
+    />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
