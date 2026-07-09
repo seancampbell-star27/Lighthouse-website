@@ -98,7 +98,28 @@ favicon/OG card generated from the logo mark; navy `#074F89` / gold `#F4D35E`.
 - [x] **RSS feed** (done 7/9/26) — live at `/rss.xml` with head autodiscovery link.
 - [ ] **Lighthouse/CWV audit** on the staging URL once the above land.
 
-## 7. Launch runbook (when Sean says go)
+## 7. Blog publishing workflow (Word doc -> live post)
+
+Sean writes drafts in Word (or anything) and drops them in `drafts/`
+(gitignored; see `drafts/README.md`). When asked to "publish" a draft, Claude:
+
+1. Converts it to markdown, preserving headings/bold/lists/links.
+2. Writes frontmatter: `title`, `description` (SEO-friendly, ~150 chars — draft
+   one if missing), `pubDate` (today unless specified). Author defaults to
+   "Lighthouse Digital Media" via the collection schema.
+3. Saves to `src/content/blog/<seo-friendly-slug>.md` — the filename IS the URL.
+4. Extracts any embedded images to `public/images/blog/`, references them
+   relatively, compresses large ones.
+5. Runs the §5 verification, commits; Sean reviews and pushes.
+
+RSS (`/rss.xml`), the sitemap, and the blog index all update automatically on
+build — no extra steps. The sample post `transparency-in-media-buying.md` should
+be REPLACED with real content before launch.
+
+If publishing volume grows or non-Claude users need to publish, consider a
+git-based CMS (Decap/Pages CMS) — the collection structure is ready for it.
+
+## 8. Launch runbook (when Sean says go)
 
 1. Confirm §3 blockers are closed and §5 checks pass on staging.
 2. Confirm old-site URL inventory: `/services`, `/dashboards`, `/case-studies`,
@@ -114,7 +135,7 @@ favicon/OG card generated from the logo mark; navy `#074F89` / gold `#F4D35E`.
    `© year` check; confirm the workers.dev noindex did NOT leak to production.
 6. Update this file and mark launch complete.
 
-## 8. Session history (context for future sessions)
+## 9. Session history (context for future sessions)
 
 - **6/17/26 (Opus):** scaffolded site, all pages, blog, contact form (as Pages
   Functions), content reference in `input/`.

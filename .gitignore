@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # local preview artifact
 Lighthouse-Website-Preview.html
+
+# blog drafts (working files, not published source)
+drafts/
+!drafts/README.md
