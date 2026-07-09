@@ -39,7 +39,6 @@ const features = [
 
   <section class="section">
     <div class="container">
-      <ContentPending note="Full /dashboards detail (sample screenshots, tooling, embed examples) was not captured from the live site. Add real dashboard visuals and any platform names (e.g. Looker Studio) before launch." />
       <div class="grid-features">
         {features.map((f) => (
           <div class="card reveal">
@@ -48,6 +47,37 @@ const features = [
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- ============== LIVE SAMPLE DASHBOARD ============== -->
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">See it live</span>
+        <h2>Explore a sample dashboard</h2>
+        <p class="lede">
+          A working multi-channel performance dashboard — the same structure our
+          clients use to track spend, pacing, and results across every channel.
+          Use the filters and page controls just like a client would.
+        </p>
+      </div>
+
+      <div class="dash-embed reveal">
+        <div class="dash-embed-placeholder" id="dash-placeholder">
+          <p class="dash-embed-title">Sample Multi-Channel Performance Dashboard</p>
+          <p class="dash-embed-sub">11 pages · Search, social, video &amp; programmatic · Interactive filters</p>
+          <button type="button" class="btn btn--primary" id="dash-load">Load interactive dashboard</button>
+        </div>
+      </div>
+      <p class="dash-embed-fallback">
+        Prefer a full-screen view?
+        <a
+          href="https://lookerstudio.google.com/reporting/88143c73-d46a-462b-b637-57a75a68d706/page/p_b2rsx7f90c"
+          target="_blank"
+          rel="noopener"
+        >Open the sample dashboard in a new tab ↗</a>
+      </p>
     </div>
   </section>
 
@@ -60,7 +90,73 @@ const features = [
   </section>
 </BaseLayout>
 
+<script>
+  // Click-to-load keeps Google's embed JS out of the critical path (CWV).
+  const btn = document.getElementById('dash-load');
+  btn?.addEventListener('click', () => {
+    const holder = document.querySelector('.dash-embed');
+    if (!holder) return;
+    const iframe = document.createElement('iframe');
+    iframe.src =
+      'https://lookerstudio.google.com/embed/reporting/88143c73-d46a-462b-b637-57a75a68d706/page/p_b2rsx7f90c';
+    iframe.title = 'Sample multi-channel performance dashboard (Looker Studio)';
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+    iframe.className = 'dash-embed-frame';
+    holder.replaceChildren(iframe);
+  });
+</script>
+
 <style>
+  .dash-embed {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--white);
+    aspect-ratio: 4 / 3;
+    max-height: 820px;
+  }
+  .dash-embed-placeholder {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 2rem;
+    background:
+      radial-gradient(900px 400px at 80% -10%, rgba(244, 211, 94, 0.18), transparent 60%),
+      linear-gradient(180deg, var(--white) 0%, var(--surface) 100%);
+  }
+  .dash-embed-title {
+    font-family: var(--ff-serif);
+    font-size: 1.35rem;
+    color: var(--ink);
+    margin: 0;
+  }
+  .dash-embed-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0 0 1rem;
+  }
+  .dash-embed-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .dash-embed-fallback {
+    margin-top: 0.9rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .section-head {
+    max-width: 60ch;
+    margin-bottom: 2rem;
+  }
+
   .grid-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
