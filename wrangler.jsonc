@@ -1,0 +1,13 @@
+// Cloudflare Workers config — static site + contact API in one Worker.
+// The Git-connected build runs `npm run build` (Astro -> dist/), then
+// `npx wrangler deploy` picks up this file.
+{
+  "name": "lighthouse-website",
+  "compatibility_date": "2026-07-01",
+  "main": "worker/index.js",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  }
+}
