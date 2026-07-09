@@ -65,11 +65,40 @@ const features = [
 
       <div class="dash-embed reveal">
         <div class="dash-embed-placeholder" id="dash-placeholder">
-          <p class="dash-embed-title">Sample Multi-Channel Performance Dashboard</p>
-          <p class="dash-embed-sub">11 pages · Search, social, video &amp; programmatic · Interactive filters</p>
-          <button type="button" class="btn btn--primary" id="dash-load">Load interactive dashboard</button>
+          <img
+            src="/images/dashboard-web/paid-media-summary.webp"
+            alt="Sample paid media summary dashboard showing spend, impressions, clicks, CPC, CTR and CPM scorecards, a click performance trend chart, and a channel performance table"
+            width="1072"
+            height="801"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="dash-embed-overlay">
+            <p class="dash-embed-title">Sample Multi-Channel Performance Dashboard</p>
+            <p class="dash-embed-sub">11 pages · Search, social, video &amp; programmatic · Interactive filters</p>
+            <button type="button" class="btn btn--primary" id="dash-load">Load interactive dashboard</button>
+          </div>
         </div>
       </div>
+      <div class="dash-gallery reveal">
+        <figure>
+          <img
+            src="/images/dashboard-web/paid-search-summary.webp"
+            alt="Paid search summary dashboard page with campaign performance broken out by brand and non-brand"
+            width="1067" height="801" loading="lazy" decoding="async"
+          />
+          <figcaption>Channel deep-dives — every channel gets its own summary page</figcaption>
+        </figure>
+        <figure>
+          <img
+            src="/images/dashboard-web/click-performance.webp"
+            alt="Click performance over time chart with partner and creative performance table"
+            width="997" height="547" loading="lazy" decoding="async"
+          />
+          <figcaption>Trends and creative-level detail, filterable by partner and concept</figcaption>
+        </figure>
+      </div>
+
       <p class="dash-embed-fallback">
         Prefer a full-screen view?
         <a
@@ -118,7 +147,18 @@ const features = [
     max-height: 820px;
   }
   .dash-embed-placeholder {
+    position: relative;
     height: 100%;
+  }
+  .dash-embed-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+  .dash-embed-overlay {
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -126,9 +166,8 @@ const features = [
     gap: 0.5rem;
     text-align: center;
     padding: 2rem;
-    background:
-      radial-gradient(900px 400px at 80% -10%, rgba(244, 211, 94, 0.18), transparent 60%),
-      linear-gradient(180deg, var(--white) 0%, var(--surface) 100%);
+    background: rgba(245, 248, 251, 0.82);
+    backdrop-filter: blur(2px);
   }
   .dash-embed-title {
     font-family: var(--ff-serif);
@@ -146,6 +185,31 @@ const features = [
     height: 100%;
     border: 0;
     display: block;
+  }
+  .dash-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+  }
+  .dash-gallery figure {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow);
+  }
+  .dash-gallery figcaption {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 720px) {
+    .dash-gallery {
+      grid-template-columns: 1fr;
+    }
   }
   .dash-embed-fallback {
     margin-top: 0.9rem;
