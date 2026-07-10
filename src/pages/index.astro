@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import AnimatedMark from '../components/AnimatedMark.astro';
+import SpinningValues from '../components/SpinningValues.astro';
 import { SITE } from '../config/site';
 
 const capabilities = ['Search', 'Social', 'Video', 'Programmatic', 'Custom Dashboards'];
@@ -91,16 +93,9 @@ const jsonLd = {
         </ul>
       </div>
     </div>
-    <img
-      src="/images/logo-mark.png"
-      alt=""
-      class="hero-mark"
-      width="512"
-      height="512"
-      loading="eager"
-      decoding="async"
-      aria-hidden="true"
-    />
+    <div class="hero-mark" aria-hidden="true">
+      <AnimatedMark size="100%" />
+    </div>
   </section>
 
   <!-- ============== APPROACH ============== -->
@@ -109,6 +104,9 @@ const jsonLd = {
       <div class="approach-head">
         <span class="eyebrow">Our approach</span>
         <h2>Transparency in every transaction</h2>
+        <div class="approach-spin">
+          <SpinningValues size="200px" />
+        </div>
       </div>
       <div class="approach-body">
         <p>
@@ -249,8 +247,8 @@ const jsonLd = {
     right: clamp(-6rem, -2vw, 2rem);
     bottom: -18%;
     width: clamp(280px, 32vw, 460px);
-    height: auto;
-    opacity: 0.07;
+    aspect-ratio: 1;
+    opacity: 0.08;
     pointer-events: none;
     user-select: none;
   }
@@ -296,6 +294,16 @@ const jsonLd = {
   }
   .approach-head h2 {
     margin: 0;
+  }
+  .approach-spin {
+    margin-top: 2rem;
+  }
+  @media (max-width: 800px) {
+    .approach-spin {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
   }
 
   /* Section heads */
