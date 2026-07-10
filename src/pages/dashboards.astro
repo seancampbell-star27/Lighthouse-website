@@ -123,8 +123,11 @@ const features = [
   // Click-to-load keeps Google's embed JS out of the critical path (CWV).
   // Looker Studio renders reports at their native canvas size; scale the
   // iframe so the report fills the container width at any screen size.
-  const REPORT_W = 1200;
-  const REPORT_H = 900;
+  // Measured from the report: canvas is 1200px wide, tallest page ~1165px.
+  // Extra headroom prevents iframe scrollbars (a vertical scrollbar steals
+  // ~17px of width and crops the right edge of the canvas).
+  const REPORT_W = 1220;
+  const REPORT_H = 1230;
   const btn = document.getElementById('dash-load');
   btn?.addEventListener('click', () => {
     const holder = document.querySelector('.dash-embed') as HTMLElement | null;
