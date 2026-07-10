@@ -121,35 +121,33 @@ const features = [
 
 <script>
   // Click-to-load keeps Google's embed JS out of the critical path (CWV).
-  // Looker Studio renders reports at their native canvas size; scale the
-  // iframe so the report fills the container width at any screen size.
-  // Measured from the report: canvas is 1200px wide, tallest page ~1165px.
-  // Extra headroom prevents iframe scrollbars (a vertical scrollbar steals
-  // ~17px of width and crops the right edge of the canvas).
-  const REPORT_W = 1220;
-  const REPORT_H = 1230;
+  // The report's display mode must be "Fit to width" in Looker Studio
+  // (View menu) — Looker then scales the report to the iframe itself.
+  // On small screens the embed is unusable, so open the report directly.
+  const EMBED_URL =
+    'https://lookerstudio.google.com/embed/reporting/88143c73-d46a-462b-b637-57a75a68d706/page/p_b2rsx7f90c';
+  const FULL_URL =
+    'https://lookerstudio.google.com/reporting/88143c73-d46a-462b-b637-57a75a68d706/page/p_b2rsx7f90c';
+
   const btn = document.getElementById('dash-load');
   btn?.addEventListener('click', () => {
-    const holder = document.querySelector('.dash-embed') as HTMLElement | null;
+    if (window.innerWidth < 700) {
+      window.open(FULL_URL, '_blank', 'noopener');
+      return;
+    }
+    const holder = document.querySelector('.dash-embed');
     if (!holder) return;
     const iframe = document.createElement('iframe');
-    iframe.src =
-      'https://lookerstudio.google.com/embed/reporting/88143c73-d46a-462b-b637-57a75a68d706/page/p_b2rsx7f90c';
+    iframe.src = EMBED_URL;
     iframe.title = 'Sample multi-channel performance dashboard (Looker Studio)';
     iframe.setAttribute('allowfullscreen', '');
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+    iframe.setAttribute(
+      'sandbox',
+      'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox'
+    );
     iframe.className = 'dash-embed-frame';
-    iframe.width = String(REPORT_W);
-    iframe.height = String(REPORT_H);
     holder.replaceChildren(iframe);
     holder.classList.add('is-live');
-    const fit = () => {
-      const scale = holder.clientWidth / REPORT_W;
-      iframe.style.transform = `scale(${scale})`;
-      holder.style.height = `${Math.round(REPORT_H * scale)}px`;
-    };
-    fit();
-    window.addEventListener('resize', fit);
   });
 </script>
 
@@ -166,6 +164,7 @@ const features = [
   .dash-embed.is-live {
     aspect-ratio: auto;
     max-height: none;
+    height: min(78vh, 900px);
   }
   .dash-embed-placeholder {
     position: relative;
@@ -202,9 +201,10 @@ const features = [
     margin: 0 0 1rem;
   }
   .dash-embed-frame {
+    width: 100%;
+    height: 100%;
     border: 0;
     display: block;
-    transform-origin: top left;
   }
   .dash-gallery {
     display: grid;
