@@ -121,9 +121,13 @@ const features = [
 
 <script>
   // Click-to-load keeps Google's embed JS out of the critical path (CWV).
+  // Looker Studio renders reports at their native canvas size; scale the
+  // iframe so the report fills the container width at any screen size.
+  const REPORT_W = 1200;
+  const REPORT_H = 900;
   const btn = document.getElementById('dash-load');
   btn?.addEventListener('click', () => {
-    const holder = document.querySelector('.dash-embed');
+    const holder = document.querySelector('.dash-embed') as HTMLElement | null;
     if (!holder) return;
     const iframe = document.createElement('iframe');
     iframe.src =
@@ -132,7 +136,17 @@ const features = [
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
     iframe.className = 'dash-embed-frame';
+    iframe.width = String(REPORT_W);
+    iframe.height = String(REPORT_H);
     holder.replaceChildren(iframe);
+    holder.classList.add('is-live');
+    const fit = () => {
+      const scale = holder.clientWidth / REPORT_W;
+      iframe.style.transform = `scale(${scale})`;
+      holder.style.height = `${Math.round(REPORT_H * scale)}px`;
+    };
+    fit();
+    window.addEventListener('resize', fit);
   });
 </script>
 
@@ -145,6 +159,10 @@ const features = [
     background: var(--white);
     aspect-ratio: 4 / 3;
     max-height: 820px;
+  }
+  .dash-embed.is-live {
+    aspect-ratio: auto;
+    max-height: none;
   }
   .dash-embed-placeholder {
     position: relative;
@@ -181,10 +199,9 @@ const features = [
     margin: 0 0 1rem;
   }
   .dash-embed-frame {
-    width: 100%;
-    height: 100%;
     border: 0;
     display: block;
+    transform-origin: top left;
   }
   .dash-gallery {
     display: grid;

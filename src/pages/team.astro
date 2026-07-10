@@ -1,11 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import ContentPending from '../components/ContentPending.astro';
 
-// Replace with real team members: name, title, short bio, headshot in
-// /public/images/team/. Keep count flexible.
-const slots = [1, 2, 3, 4];
+// Headshots live in /public/images/team/ (square webp).
+// photo: null renders an initials placeholder until the headshot arrives.
+const team = [
+  {
+    name: 'Matt Sheehan',
+    title: 'Founder & Head of Operations',
+    photo: '/images/team/matt-sheehan.webp',
+    initials: 'MS',
+    bio: `Matt Sheehan is the Founder and Head of Operations at Lighthouse Digital Media. He has over 20 years of experience in media and advertising, having worked at iconic brands like the Wall Street Journal, Sports Illustrated and the Golf Digest Companies. Prior to Lighthouse, he spent over 7 years at Basis Technologies (formerly Centro), where he excelled at helping clients solve their digital workflow challenges and driving performance for their campaigns. In his spare time, Matt loves spending time with his wife (Jessie), their two children (Aiden and Maggie), and their dog (Finley). His passions are coaching, playing golf and paddleboarding.`,
+  },
+  {
+    name: 'Gary Manis',
+    title: 'Partner & Business Development Lead',
+    photo: null,
+    initials: 'GM',
+    bio: `Gary Manis is a Partner and the Business Development Lead at Lighthouse Digital Media. He has 19 years of digital marketing experience, leading teams at Basis Technologies (formerly Centro) and Forbes.com during that time. His passions in our industry are brainstorming business solutions, campaign performance, and transparency. Outside of work Gary spends time at home or on sports fields, with his wife Melissa and their three kids — Garret, Caroline, and Emily. A favorite quote: "Integrity is doing the right thing, even when no one is watching." (C.S. Lewis)`,
+  },
+  {
+    name: 'Sean Campbell',
+    title: 'Director of Data Analytics & Media',
+    photo: '/images/team/sean-campbell.webp',
+    initials: 'SC',
+    bio: `Sean Campbell is a Director of Data Analytics and Media at Lighthouse Digital Media. He has over 10 years of experience planning, optimizing, and reporting on digital media campaigns during his time at Basis Technologies, Monster.com, and now Lighthouse. Sean has a particular passion for data analytics and dashboarding and graduated with a master's degree in data analytics from Boston University in 2024. Outside of the office, Sean enjoys trips to visit his siblings and growing number of nieces and nephews in Houston and New York City as well as brewing beer with his mom and watching sports with his dad. His favorite book is Thinking, Fast and Slow by Daniel Kahneman for its fascinating perspective on cognitive biases and decision making.`,
+  },
+  {
+    name: 'Maria M. Cloutier',
+    title: 'Director of Media',
+    photo: '/images/team/maria-cloutier.webp',
+    initials: 'MC',
+    bio: `Maria M. Cloutier is a Director of Media at Lighthouse with nearly a decade of experience in planning and executing digital media. She came into digital by way of writing, working first in journalism and as a content strategist at Wayfair before joining the digital media team at Basis Technologies (formerly Centro). Outside of work Maria enjoys reading and writing, caring for her ever-growing collection of plants, and re-watching West Wing.`,
+  },
+  {
+    // TODO(Sean): confirm Holly's last name for the site + SEO.
+    name: 'Holly',
+    title: 'Senior Digital Media Specialist',
+    photo: null,
+    initials: 'H',
+    bio: `Holly is a Senior Digital Media Specialist at Lighthouse with 10 years of experience in digital marketing. She has spent most of her career executing advertising and paid media campaigns, including work in the book publishing industry at Simon & Schuster, and also has experience in agency roles focused on audience insights and client management. She specializes in planning, executing, and optimizing multi-channel campaigns across search, social, and display. Holly holds a BS in Marketing from the University of Delaware's Lerner College of Business and an MFA in Creative Writing from Lesley University. When she's not analyzing performance or refining campaigns, she enjoys reading and writing, spending time outdoors, and dabbling in various arts and crafts.`,
+  },
+];
 ---
 
 <BaseLayout
@@ -20,15 +56,30 @@ const slots = [1, 2, 3, 4];
 
   <section class="section">
     <div class="container">
-      <ContentPending note="No team bios, titles, or headshots were captured. Add real names, roles, short bios, and photos (to /public/images/team/) before launch." />
-      <div class="grid-team">
-        {slots.map(() => (
-          <div class="card member reveal">
-            <div class="avatar" aria-hidden="true"></div>
-            <h3>Name</h3>
-            <p class="role">Title</p>
-            <p class="bio">Short bio pending.</p>
-          </div>
+      <div class="team-list">
+        {team.map((m) => (
+          <article class="card member reveal">
+            {m.photo ? (
+              <img
+                src={m.photo}
+                alt={`Photo of ${m.name}`}
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+                class="headshot"
+              />
+            ) : (
+              <div class="headshot headshot--placeholder" aria-hidden="true">
+                {m.initials}
+              </div>
+            )}
+            <div class="member-body">
+              <h2>{m.name}</h2>
+              <p class="role">{m.title}</p>
+              <p class="bio">{m.bio}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
@@ -36,35 +87,55 @@ const slots = [1, 2, 3, 4];
 </BaseLayout>
 
 <style>
-  .grid-team {
+  .team-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.25rem;
+    gap: 1.5rem;
+    max-width: 900px;
+    margin-inline: auto;
   }
   .member {
-    text-align: center;
+    display: flex;
+    gap: 1.75rem;
+    align-items: flex-start;
   }
-  .avatar {
-    width: 84px;
-    height: 84px;
-    border-radius: 50%;
-    margin: 0 auto 1rem;
-    background: linear-gradient(135deg, var(--surface-2), var(--gold-soft));
+  .headshot {
+    width: 148px;
+    height: 148px;
+    border-radius: var(--radius);
+    object-fit: cover;
+    flex-shrink: 0;
     border: 1px solid var(--line);
   }
-  .member h3 {
+  .headshot--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
     color: var(--navy);
-    margin-bottom: 0.15rem;
+    background: linear-gradient(135deg, var(--surface-2), var(--gold-soft));
+  }
+  .member h2 {
+    font-size: 1.35rem;
+    color: var(--navy);
+    margin-bottom: 0.1rem;
   }
   .role {
     color: var(--muted);
     font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 0.6rem;
+    font-size: 0.92rem;
+    margin-bottom: 0.75rem;
   }
   .bio {
-    font-size: 0.92rem;
-    color: var(--muted);
-    font-style: italic;
+    font-size: 0.97rem;
+    margin: 0;
+  }
+  @media (max-width: 620px) {
+    .member {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
   }
 </style>
