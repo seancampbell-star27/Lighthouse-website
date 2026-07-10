@@ -9,7 +9,12 @@ const isActive = (href: string) =>
 <header class="site-header">
   <div class="container header-inner">
     <a href="/" class="brand" aria-label={`${SITE.name} — home`}>
-      <AnimatedMark size="24px" />
+      <!-- Expanding beam: grows from the mark's light source across the
+           wordmark, like the original site's logo animation. -->
+      <svg class="brand-beam" viewBox="0 0 208 40" aria-hidden="true">
+        <polygon class="beam-flash" points="8,16 208,-4 208,32" fill="#F4D35E" />
+      </svg>
+      <AnimatedMark size="24px" sweep={false} />
       <img
         src="/images/wordmark.webp"
         alt={`${SITE.name} logo`}
@@ -77,13 +82,60 @@ const isActive = (href: string) =>
     min-height: 72px;
   }
   .brand {
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 5px;
   }
+  .brand > :global(svg:not(.brand-beam)),
+  .brand-wordmark {
+    position: relative;
+    z-index: 1;
+  }
   .brand-wordmark {
     height: 40px;
     width: auto;
+  }
+  .brand-beam {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: visible;
+  }
+  .beam-flash {
+    transform-origin: 8px 16px;
+    transform-box: view-box;
+    animation: beam-grow 6s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes beam-grow {
+    0% {
+      transform: scale(0.04);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.45;
+    }
+    50% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    72% {
+      transform: scale(1);
+      opacity: 0.45;
+    }
+    92%,
+    100% {
+      transform: scale(1);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .beam-flash {
+      animation: none;
+    }
   }
   .nav-desktop {
     display: flex;

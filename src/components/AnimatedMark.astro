@@ -8,8 +8,10 @@
 interface Props {
   /** CSS size, e.g. "40px" */
   size?: string;
+  /** Render the rotating beam sweep (hero watermark). Off = static mark. */
+  sweep?: boolean;
 }
-const { size = '40px' } = Astro.props;
+const { size = '40px', sweep = true } = Astro.props;
 ---
 
 <svg
@@ -20,9 +22,11 @@ const { size = '40px' } = Astro.props;
   style={`width:${size};height:${size};`}
 >
   <!-- Sweeping beam (behind the mark) -->
-  <g class="mark-beam">
-    <polygon points="43,89 132,62 132,84" fill="#F4D35E" opacity="0.55" />
-  </g>
+  {sweep && (
+    <g class="mark-beam">
+      <polygon points="43,89 132,62 132,84" fill="#F4D35E" opacity="0.55" />
+    </g>
+  )}
   <!-- Light source -->
   <rect class="mark-light" x="37" y="83" width="12" height="12" fill="#F4D35E" />
   <!-- Static navy mark -->
