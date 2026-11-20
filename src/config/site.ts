@@ -18,8 +18,6 @@ export const SITE = {
 export const NAV = [
   { label: 'Strategy & Buying', href: '/services' },
   { label: 'Custom Dashboards', href: '/dashboards' },
-  { label: 'Case Studies', href: '/case-studies' },
   { label: 'The Team', href: '/team' },
-  { label: 'Blog', href: '/blog' },
   { label: 'Contact', href: '/contact' },
 ] as const;

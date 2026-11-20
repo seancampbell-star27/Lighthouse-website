@@ -3,7 +3,7 @@ title: "What transparency in media buying actually means"
 description: "Fee transparency is more than a buzzword. Here's how working media, agency fees, and reporting should fit together — and why it matters for your results."
 pubDate: 2026-06-10
 author: "Lighthouse Digital Media"
-draft: false
+draft: true
 ---
 
 Most advertisers have heard the word "transparency" from every agency they've
