@@ -63,6 +63,17 @@ async function handleContact(request, env) {
   return json({ ok: true });
 }
 
+// Canonical host (Sean, 2026-11-20): www.lighthousedigitalmedia.net.
+// DORMANT until a custom domain is actually routed to this Worker. Today only
+// the workers.dev staging host reaches it, and that host is deliberately NOT
+// in the set below so staging keeps working.
+const CANONICAL_HOST = 'www.lighthousedigitalmedia.net';
+const REDIRECT_HOSTS = new Set([
+  'lighthousedigitalmedia.net',      // apex -> www
+  'lighthousedigitalmedia.com',      // legacy .com -> .net
+  'www.lighthousedigitalmedia.com',
+]);
+
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
@@ -81,6 +92,17 @@ const SECURITY_HEADERS = {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Canonical-host redirect. Preserves path + query. 301 is cacheable for
+    // GET/HEAD; 308 keeps a POST a POST instead of silently downgrading it.
+    if (REDIRECT_HOSTS.has(url.hostname)) {
+      url.hostname = CANONICAL_HOST;
+      url.protocol = 'https:';
+      url.port = '';
+      const status =
+        request.method === 'GET' || request.method === 'HEAD' ? 301 : 308;
+      return new Response(null, { status, headers: { Location: url.toString() } });
+    }
 
     if (url.pathname === '/api/contact') {
       if (request.method === 'POST') return handleContact(request, env);

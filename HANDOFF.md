@@ -1,7 +1,7 @@
 # Lighthouse Website — Project Handoff & Status
 
 > **Purpose:** working reference for anyone (human or Claude session) picking up
-> this project. Read this before making changes. Last updated: 2026-07-10.
+> this project. Read this before making changes. Last updated: 2026-11-20.
 
 ---
 
@@ -15,6 +15,11 @@
 - **Staging URL:** https://lighthouse-website.sean-campbell.workers.dev (live, verified)
 - **Production domain:** www.lighthousedigitalmedia.net — **still points at the OLD site.**
   Nothing changes there until the custom domain is attached in Cloudflare (§8).
+- **Canonical host decided (Sean, 11/20/26): `www.lighthousedigitalmedia.net`.**
+  `lighthousedigitalmedia.com` is a SECOND live property also serving the old
+  site (not a redirect — its internal links point at .com). Host redirects for
+  .com and the .net apex are already in `worker/index.js`, dormant until a
+  custom domain is routed to the Worker.
 - **Publish flow:** edit files → `npm run dev` to preview → commit → `git push` →
   Cloudflare auto-builds (~1–2 min). A push to `main` IS the publish button.
   After ANY visual check on staging: hard refresh (Ctrl+F5) — Sean's browser has
@@ -56,8 +61,8 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 | Services | Done (carried from old site copy) |
 | Dashboards | Done — live Looker Studio embed (click-to-load) + screenshot gallery |
 | Team | Done — 5 real bios; photos for Matt/Sean/Maria; initials placeholders for Gary + Holly |
-| Case Studies | **PLACEHOLDER — needs Sean's content. Do not invent.** |
-| Blog | Template done; sample post must be replaced before launch |
+| Case Studies | **PARKED (11/20/26)** — route hidden pending real content. Page source preserved at `src/pages/_case-studies.astro` |
+| Blog | **PARKED (11/20/26)** — route hidden pending real posts. Source at `src/pages/_blog/`; sample post set `draft: true` |
 | Contact | Form works end-to-end EXCEPT email delivery (see §5) |
 
 ## 4. Critical gotchas — read before touching anything
@@ -83,9 +88,19 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 - **Never create a `.npmrc` with a session-specific cache path** — it silently
   breaks `npm install` in every later session. This happened once already.
 - **Keep `node_modules` and npm caches out of this folder** (OneDrive churn).
-  Claude sessions: build in /tmp. Sean's local installs are fine.
-- **No GitHub auth in Claude's sandbox.** Claude commits locally; Sean runs
-  `git push` from his own PowerShell. Don't attempt pushes from the sandbox.
+  Sean's local installs are fine.
+- **Claude CANNOT build from the mounted folder.** Sean's `node_modules` is a
+  WINDOWS install, so the Linux-side shell fails with
+  `Cannot find module @rollup/rollup-linux-x64-gnu`. That shell also has no
+  network, so `npm install` can't repair it there. Copying `node_modules` to
+  /tmp is too slow (times out). **Correct workflow: clone the repo into the
+  cloud container, `npm ci`, build and verify there, then apply the same edits
+  to the mounted folder and commit.** Confirmed 11/20/26.
+- **GitHub: Claude has READ access only.** The cloud container can clone/fetch
+  the repo, but the repo API returns 403 and there is no push credential.
+  Claude commits locally; Sean runs `git push` from his own PowerShell.
+- **Cloudflare: Claude has NO access.** No API token, no wrangler auth. Setting
+  Worker env vars, attaching domains, and reading build logs are Sean-only.
 - **PowerShell on Sean's machine:** execution policy set to RemoteSigned
   (CurrentUser). If npm errors return, `npm.cmd` bypasses it.
 - **Stale browser cache:** Sean's browser has served old page versions after
@@ -94,19 +109,28 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 
 ## 5. Launch blockers (in priority order)
 
-1. **Case studies content from Sean** — the only page still placeholder.
+1. **Case studies content from Sean** — page is PARKED (hidden), not broken.
+   Un-hide by renaming `_case-studies.astro` back and restoring the NAV entry.
+   NOTE: the OLD site serves a live `/case-studies` page, so launching with the
+   route hidden turns a working URL into a 404 — decide redirect vs un-hide.
 2. **Contact form email delivery** — form validates + returns success but does
    NOT send email. Wiring: Sean creates a Resend account, verifies the domain
    (2 DNS records — need to know who hosts DNS), then sets Worker env vars
    (Cloudflare → lighthouse-website → Settings → Variables): `RESEND_API_KEY`
    (secret), optionally `CONTACT_TO`/`CONTACT_FROM`. Code in `worker/index.js`
    activates delivery automatically once the key exists. Test end-to-end after.
-3. **Replace the sample blog post** (`transparency-in-media-buying.md`).
+3. **Replace the sample blog post** (`transparency-in-media-buying.md`, now
+   `draft: true`). Blog route is PARKED until there is real content.
 4. **Gary + Holly headshots** (initials placeholders show until then; drop
    photos in `public/images/Headshots/` and ask Claude to process).
 5. **Google Partner badge** — confirm status is current before displaying.
 6. **Cookie consent** — no analytics on the new site yet; if GA4 is added,
    revisit consent requirements.
+7. **Legacy URL decisions (found 11/20/26).** The old site links to two paths
+   the new site does not have: `/cookies` (Cookie Settings) and `/login`.
+   `/login` may be a client portal — confirm with Sean what it does before
+   launch; killing it could break something clients use. Neither has a
+   redirect yet; do not invent targets.
 
 ## 6. Verification checklist (after ANY change)
 
@@ -141,9 +165,14 @@ volume grows or non-Claude users need to publish, consider a git-based CMS
    legacy URLs (site:lighthousedigitalmedia.net) and add redirects in
    `worker/index.js` if needed.
 3. Run a Lighthouse/CWV audit on staging; fix anything red.
-4. Cloudflare → lighthouse-website → Settings → Domains & Routes → add custom
-   domain `www.lighthousedigitalmedia.net` (and decide apex handling: redirect
-   apex → www).
+4. ⚠️ **BEFORE moving nameservers to Cloudflare: copy the MX records first.**
+   Company email is on lighthousedigitalmedia.net (contact@...). Cloudflare's
+   zone import usually catches MX, but verify manually — a miss takes email
+   down. Workers custom domains require the zone to live in the Cloudflare
+   account, so nameservers must point at Cloudflare.
+5. Cloudflare → lighthouse-website → Settings → Domains & Routes → add custom
+   domain `www.lighthousedigitalmedia.net`. Apex → www and .com → .net are
+   already handled in `worker/index.js` once the domains route to the Worker.
 5. Verify: production domain serves new site, HTTPS valid, canonicals correct,
    contact form delivers a real email end-to-end, workers.dev noindex did NOT
    leak to production (it's hostname-gated in worker/index.js).
@@ -165,3 +194,13 @@ volume grows or non-Claude users need to publish, consider a git-based CMS
   expands over wordmark; wordmark rebuilt with transparent bg); spinning-values
   graphic built then removed at Sean's request; hero watermark removed at
   Sean's request. All verified on staging.
+
+- **11/20/26 (Opus 5):** Verified staging healthy (HTTP 200) after Sean
+  reported the site down — he had checked an unrelated URL
+  (`lighthouse.dev-lindell.com`), which does not resolve and appears nowhere in
+  this repo. Confirmed `.com` AND `.net` both serve the OLD site independently.
+  Canonical set to `www.lighthousedigitalmedia.net`. PARKED Case Studies + Blog
+  routes (underscore-prefix) so they can't launch as placeholders. Added dormant
+  canonical-host redirects to `worker/index.js`. Discovered the Windows
+  `node_modules` build blocker (§4) and corrected the stale "no GitHub auth"
+  note. Flagged MX-record risk and the `/cookies` + `/login` legacy paths.
