@@ -167,6 +167,14 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
    GTM/GA domains must be added to the CSP in `worker/index.js` (script-src,
    connect-src, img-src) or tags will silently fail.
 
+10. **Dashboards page — kept as-is (Sean, 11/24/26).** Screenshots show Jan 2023
+   dummy data. OPEN QUESTION before launch: the live Looker embed (report
+   88143c73…) has field labels naming South Shore Bank ("Partner - South Shore
+   Bank", "Cost - South Shore Bank", etc.) and data that looks real. Confirm it's
+   sample data / OK to show publicly, or rename fields / repoint to anonymized data.
+   Report's default date range is Jan 1 2026 – Dec 31 2027. Chrome extension can't
+   screenshot Looker Studio — Sean captures any new screenshots himself.
+
 **Legacy URL inventory (checked 11/23/26 via Google `site:` + old-site nav/footer):**
 `/`, `/services`, `/dashboards`, `/team`, `/contact`, `/privacy`, `/terms`,
 `/cookies` all exist on the new site. `/case-studies` (+ detail sub-pages) → 302
