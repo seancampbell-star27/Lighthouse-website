@@ -1,7 +1,7 @@
 # Lighthouse Website — Project Handoff & Status
 
 > **Purpose:** working reference for anyone (human or Claude session) picking up
-> this project. Read this before making changes. Last updated: 2026-11-20.
+> this project. Read this before making changes. Last updated: 2026-11-23.
 
 ---
 
@@ -20,6 +20,14 @@
   site (not a redirect — its internal links point at .com). Host redirects for
   .com and the .net apex are already in `worker/index.js`, dormant until a
   custom domain is routed to the Worker.
+- **DNS (moved 11/23/26):** lighthousedigitalmedia.net nameservers now point to
+  Cloudflare (`leanna` / `milan.ns.cloudflare.com`), same Cloudflare account as the
+  Worker. Squarespace remains the REGISTRAR only (DNSSEC was disabled there for the
+  switch; can re-enable via Cloudflare later). Email + old site verified working after
+  the move. Old site = Laravel Forge on DigitalOcean (`104.248.229.71`); `@`/`www` A
+  records and both `_acme-challenge` CNAMEs (Forge cert renewal) are kept as DNS-only
+  until launch day. Google Workspace MX + Mailgun (`mg.`, old site) records carried over.
+  `lighthousedigitalmedia.com` is NOT in Cloudflare yet.
 - **Publish flow:** edit files → `npm run dev` to preview → commit → `git push` →
   Cloudflare auto-builds (~1–2 min). A push to `main` IS the publish button.
   After ANY visual check on staging: hard refresh (Ctrl+F5) — Sean's browser has
@@ -109,11 +117,20 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 
 ## 5. Launch blockers (in priority order)
 
-1. **Case studies content from Sean** — page is PARKED (hidden), not broken.
+1. **Case studies** — RESOLVED FOR LAUNCH 11/23/26: launch without it;
+   `/case-studies` (and sub-paths) TEMPORARILY 302-redirects to the homepage via
+   `LEGACY_REDIRECTS` in `worker/index.js`. When real content exists: delete that
+   entry AND un-hide the page (below). Original notes:
+   page is PARKED (hidden), not broken.
    Un-hide by renaming `_case-studies.astro` back and restoring the NAV entry.
    NOTE: the OLD site serves a live `/case-studies` page, so launching with the
    route hidden turns a working URL into a 404 — decide redirect vs un-hide.
-2. **Contact form email delivery** — form validates + returns success but does
+2. ~~**Contact form email delivery**~~ — **DONE 11/23/26.** Resend account created,
+   domain verified (records `resend._domainkey`, `send`, `rsend`, `_dmarc` p=none in
+   Cloudflare), `RESEND_API_KEY` set as a RUNTIME secret (Settings → Variables and
+   Secrets — NOT the Build section's variables, which the live Worker can't see).
+   Test delivered to contact@. Pending: Matt to confirm inbox/spam + Reply-To.
+   Original notes: form validates + returns success but does
    NOT send email. Wiring: Sean creates a Resend account, verifies the domain
    (2 DNS records — need to know who hosts DNS), then sets Worker env vars
    (Cloudflare → lighthouse-website → Settings → Variables): `RESEND_API_KEY`
@@ -126,7 +143,9 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 5. **Google Partner badge** — confirm status is current before displaying.
 6. **Cookie consent** — no analytics on the new site yet; if GA4 is added,
    revisit consent requirements.
-7. **Legacy URL decisions (found 11/20/26).** The old site links to two paths
+7. **Legacy URL decisions** — `/login` RESOLVED 11/23/26: dead page, nobody uses
+   it; 301-redirects to the homepage (`LEGACY_REDIRECTS`). `/cookies` still has no
+   redirect (falls to 404). Original notes (found 11/20/26): The old site links to two paths
    the new site does not have: `/cookies` (Cookie Settings) and `/login`.
    `/login` may be a client portal — confirm with Sean what it does before
    launch; killing it could break something clients use. Neither has a
@@ -170,8 +189,13 @@ volume grows or non-Claude users need to publish, consider a git-based CMS
    zone import usually catches MX, but verify manually — a miss takes email
    down. Workers custom domains require the zone to live in the Cloudflare
    account, so nameservers must point at Cloudflare.
-5. Cloudflare → lighthouse-website → Settings → Domains & Routes → add custom
-   domain `www.lighthousedigitalmedia.net`. Apex → www and .com → .net are
+5. (Step 4 DONE 11/23/26 — zone is Active in Cloudflare.) Launch-day: in DNS →
+   Records delete the `@` and `www` A records (Cloudflare refuses a custom domain
+   while a conflicting record exists), then lighthouse-website → Domains tab → add
+   custom domains `www.lighthousedigitalmedia.net` AND `lighthousedigitalmedia.net`.
+   After verifying, delete both `_acme-challenge` CNAMEs. Then cancel Forge/
+   DigitalOcean hosting (Matt has the Laravel Forge login) — likely no Squarespace
+   site plan exists. Apex → www and .com → .net are
    already handled in `worker/index.js` once the domains route to the Worker.
 5. Verify: production domain serves new site, HTTPS valid, canonicals correct,
    contact form delivers a real email end-to-end, workers.dev noindex did NOT
@@ -204,3 +228,11 @@ volume grows or non-Claude users need to publish, consider a git-based CMS
   canonical-host redirects to `worker/index.js`. Discovered the Windows
   `node_modules` build blocker (§4) and corrected the stale "no GitHub auth"
   note. Flagged MX-record risk and the `/cookies` + `/login` legacy paths.
+
+- **11/23/26 (Opus 5.5):** Sean moved DNS from Squarespace to Cloudflare (records
+  imported + checked; added missing `_acme-challenge.www`; deleted `_domainconnect`;
+  website/Mailgun/acme records set DNS-only). Zone Active same day; email + old site
+  tested OK. Set up Resend for the contact form; first attempt failed silently because
+  the key was in the Build variables — moved to runtime secrets, test email Delivered.
+  Note: the form shows "Thanks" even with NO key configured — confirm delivery in
+  Resend → Emails, not by the success message.

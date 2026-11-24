@@ -74,6 +74,15 @@ const REDIRECT_HOSTS = new Set([
   'www.lighthousedigitalmedia.com',
 ]);
 
+// Legacy paths from the old site (Sean, 2026-11-23). Both go to the homepage.
+// /case-studies is TEMPORARY (302): the page will return once real content
+// exists — delete that entry when un-parking src/pages/_case-studies.astro.
+// /login was a dead page on the old site, so its redirect is permanent (301).
+const LEGACY_REDIRECTS = {
+  '/case-studies': 302,
+  '/login': 301,
+};
+
 const SECURITY_HEADERS = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
@@ -102,6 +111,16 @@ export default {
       const status =
         request.method === 'GET' || request.method === 'HEAD' ? 301 : 308;
       return new Response(null, { status, headers: { Location: url.toString() } });
+    }
+
+    // Legacy-path redirects (match with or without trailing slash, and any
+    // sub-path such as /case-studies/some-old-study).
+    const legacyRoot = '/' + (url.pathname.split('/')[1] || '');
+    if (Object.hasOwn(LEGACY_REDIRECTS, legacyRoot)) {
+      return new Response(null, {
+        status: LEGACY_REDIRECTS[legacyRoot],
+        headers: { Location: new URL('/', url).toString() },
+      });
     }
 
     if (url.pathname === '/api/contact') {
