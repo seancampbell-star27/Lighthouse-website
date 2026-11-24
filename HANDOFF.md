@@ -145,11 +145,27 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
    revisit consent requirements.
 7. **Legacy URL decisions** — `/login` RESOLVED 11/23/26: dead page, nobody uses
    it; 301-redirects to the homepage (`LEGACY_REDIRECTS`). `/cookies` still has no
-   redirect (falls to 404). Original notes (found 11/20/26): The old site links to two paths
+   redirect — superseded 11/23/26: `/cookies` is now a real page (Cookie Policy,
+   text mirrored verbatim from the old site, linked in the footer). Original notes
+   (found 11/20/26): The old site links to two paths
    the new site does not have: `/cookies` (Cookie Settings) and `/login`.
    `/login` may be a client portal — confirm with Sean what it does before
    launch; killing it could break something clients use. Neither has a
    redirect yet; do not invent targets.
+
+8. **Privacy Notice + Terms of Service are still PLACEHOLDERS** (`privacy.astro`,
+   `terms.astro` show the yellow ContentPending flag). The old site has real
+   `/privacy` and `/terms` pages — mirror them (as done for `/cookies`) or replace
+   with reviewed copy before launch.
+9. **Cookie Policy accuracy:** the mirrored text says the site uses analytics and
+   marketing cookies. True only once GA4/GTM is added (old site ran GTM-WXNFQGQH;
+   the new site has NO tracking). Either add GA4/GTM before/at launch or revise
+   that section.
+
+**Legacy URL inventory (checked 11/23/26 via Google `site:` + old-site nav/footer):**
+`/`, `/services`, `/dashboards`, `/team`, `/contact`, `/privacy`, `/terms`,
+`/cookies` all exist on the new site. `/case-studies` (+ detail sub-pages) → 302
+home; `/login` → 301 home. No other indexed legacy URLs found.
 
 ## 6. Verification checklist (after ANY change)
 
