@@ -49,7 +49,7 @@
 | `src/components/ContentPending.astro` | Yellow "content pending" flag — remove instances as real copy lands |
 | `worker/index.js` | Cloudflare Worker: static assets + `POST /api/contact` + security/cache/noindex headers |
 | `wrangler.jsonc` | Worker config: entry script + `dist/` as static assets |
-| `public/images/team/` | Optimized headshot webps (Matt, Sean, Maria; Gary + Holly pending) |
+| `public/images/team/` | Optimized 480px square headshot webps (Matt, Gary, Sean, Maria, Mike) |
 | `public/images/dashboard-web/` | Optimized dashboard screenshots used on /dashboards |
 | `public/images/wordmark.webp` | Transparent-background wordmark (beam passes behind it) |
 | `drafts/` | Gitignored inbox for Word-doc blog drafts (see §7) |
@@ -68,7 +68,7 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 | Home | Done (animated header logo; hero; approach; services; clients; testimonial) |
 | Services | Done (carried from old site copy) |
 | Dashboards | Done — live Looker Studio embed (click-to-load) + screenshot gallery |
-| Team | Done — 5 real bios; photos for Matt/Sean/Maria; initials placeholders for Gary + Holly |
+| Team | Done — 5 bios, all with photos (11/24/26: new Matt + Gary photos; Holly left Lighthouse, replaced by Mike Twohig) |
 | Case Studies | **PARKED (11/20/26)** — route hidden pending real content. Page source preserved at `src/pages/_case-studies.astro` |
 | Blog | **PARKED (11/20/26)** — route hidden pending real posts. Source at `src/pages/_blog/`; sample post set `draft: true` |
 | Contact | Form works end-to-end EXCEPT email delivery (see §5) |
