@@ -153,14 +153,18 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
    launch; killing it could break something clients use. Neither has a
    redirect yet; do not invent targets.
 
-8. **Privacy Notice + Terms of Service are still PLACEHOLDERS** (`privacy.astro`,
-   `terms.astro` show the yellow ContentPending flag). The old site has real
-   `/privacy` and `/terms` pages — mirror them (as done for `/cookies`) or replace
-   with reviewed copy before launch.
+8. ~~Privacy/Terms placeholders~~ — **DONE 11/23/26:** `/privacy` and `/terms`
+   now carry the old site's text verbatim (word counts checked section by section).
+   Wording lives in `src/legal/privacy.md` + `src/legal/terms.md`; styling is the
+   global `.legal` class in `global.css` (shared with `/cookies`). Both still list
+   the company address as One Lincoln Street 24th Floor — confirm it's current.
 9. **Cookie Policy accuracy:** the mirrored text says the site uses analytics and
    marketing cookies. True only once GA4/GTM is added (old site ran GTM-WXNFQGQH;
    the new site has NO tracking). Either add GA4/GTM before/at launch or revise
    that section.
+   Sean 11/23/26: GTM + GA4 will be added soon — keep the text as-is. When adding,
+   GTM/GA domains must be added to the CSP in `worker/index.js` (script-src,
+   connect-src, img-src) or tags will silently fail.
 
 **Legacy URL inventory (checked 11/23/26 via Google `site:` + old-site nav/footer):**
 `/`, `/services`, `/dashboards`, `/team`, `/contact`, `/privacy`, `/terms`,

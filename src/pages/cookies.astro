@@ -11,10 +11,10 @@ import PageHero from '../components/PageHero.astro';
   title="Cookie Policy"
   description="How Lighthouse Digital Media LLC uses cookies and similar tracking technologies on this website."
 >
-  <PageHero eyebrow="Legal" title="Cookie Policy" />
+  <PageHero eyebrow="Legal" title="Cookie Policy" subtitle="How we handle cookies" />
   <section class="section">
-    <div class="container article">
-      <p class="updated">Last updated: January 24, 2024</p>
+    <div class="container legal">
+      <p><em>Last updated: January 24, 2024</em></p>
       <p>
         This Cookie Policy explains how Lighthouse Digital Media LLC ("we,"
         "us," or "our") uses cookies and similar tracking technologies on our
@@ -80,12 +80,3 @@ import PageHero from '../components/PageHero.astro';
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .article { max-width: 720px; }
-  .article p, .article li { line-height: 1.75; }
-  .article h2 { margin-top: 2.25rem; margin-bottom: 0.5rem; }
-  .article ul { padding-left: 1.25rem; }
-  .article li { margin-bottom: 0.75rem; }
-  .updated { font-size: 0.9rem; opacity: 0.75; }
-</style>

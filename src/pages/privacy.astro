@@ -1,27 +1,19 @@
 ---
+// Text mirrored verbatim from the old site's /privacy (Sean, 11/23/26).
+// Edit the wording in src/legal/privacy.md and bump its "Last updated" date.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import ContentPending from '../components/ContentPending.astro';
+import { Content } from '../legal/privacy.md';
 ---
 
 <BaseLayout
-  title="Privacy Notice"
-  description="Privacy Notice for Lighthouse Digital Media LLC."
+  title="Privacy Policy"
+  description="How Lighthouse Digital Media LLC collects, uses, and manages personal data."
 >
-  <PageHero eyebrow="Legal" title="Privacy Notice" />
+  <PageHero eyebrow="Legal" title="Privacy Policy" subtitle="How we collect, use, and manage personal data" />
   <section class="section">
-    <div class="container article">
-      <ContentPending note="Placeholder legal text. Replace with your reviewed Privacy Notice (data collected, cookies, third parties, contact for requests) before launch." />
-      <p>
-        Lighthouse Digital Media LLC respects your privacy. This notice will
-        describe what information we collect, how we use it, and your choices.
-      </p>
-      <p>Final policy language is pending review.</p>
+    <div class="container legal">
+      <Content />
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .article { max-width: 720px; }
-  .article p { line-height: 1.75; }
-</style>

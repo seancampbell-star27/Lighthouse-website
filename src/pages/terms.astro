@@ -1,26 +1,19 @@
 ---
+// Text mirrored verbatim from the old site's /terms (Sean, 11/23/26).
+// Edit the wording in src/legal/terms.md and bump its "Last updated" date.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
-import ContentPending from '../components/ContentPending.astro';
+import { Content } from '../legal/terms.md';
 ---
 
 <BaseLayout
   title="Terms of Service"
-  description="Terms of Service for Lighthouse Digital Media LLC."
+  description="Terms and conditions for using the Lighthouse Digital Media website."
 >
-  <PageHero eyebrow="Legal" title="Terms of Service" />
+  <PageHero eyebrow="Legal" title="Terms of Service" subtitle="This website's terms and conditions" />
   <section class="section">
-    <div class="container article">
-      <ContentPending note="Placeholder legal text. Replace with your reviewed Terms of Service before launch." />
-      <p>
-        These Terms of Service govern your use of the Lighthouse Digital Media
-        website. Final terms are pending review.
-      </p>
+    <div class="container legal">
+      <Content />
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .article { max-width: 720px; }
-  .article p { line-height: 1.75; }
-</style>
