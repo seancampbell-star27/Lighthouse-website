@@ -68,7 +68,7 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 | Home | Done (animated header logo; hero; approach; services; clients; testimonial) |
 | Services | Done (carried from old site copy) |
 | Dashboards | Done — live Looker Studio embed (click-to-load) + screenshot gallery |
-| Team | Done — 5 bios, all with photos (11/24/26: new Matt + Gary photos; Holly left Lighthouse, replaced by Mike Twohig) |
+| Team | Done — 5 bios, all with photos (11/24/26: new Matt + Gary photos; Holly left Lighthouse, replaced by Mike Twohig, Director of Media) |
 | Case Studies | **PARKED (11/20/26)** — route hidden pending real content. Page source preserved at `src/pages/_case-studies.astro` |
 | Blog | **PARKED (11/20/26)** — route hidden pending real posts. Source at `src/pages/_blog/`; sample post set `draft: true` |
 | Contact | Form works end-to-end EXCEPT email delivery (see §5) |
