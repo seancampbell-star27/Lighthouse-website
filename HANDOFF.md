@@ -156,8 +156,9 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
 8. ~~Privacy/Terms placeholders~~ — **DONE 11/23/26:** `/privacy` and `/terms`
    now carry the old site's text verbatim (word counts checked section by section).
    Wording lives in `src/legal/privacy.md` + `src/legal/terms.md`; styling is the
-   global `.legal` class in `global.css` (shared with `/cookies`). Both still list
-   the company address as One Lincoln Street 24th Floor — confirm it's current.
+   global `.legal` class in `global.css` (shared with `/cookies`). Company address
+   updated 11/23/26 to 399 Boylston Street, 6th Floor, Boston, MA 02116 (Last
+   updated dates bumped to 11/23/26).
 9. **Cookie Policy accuracy:** the mirrored text says the site uses analytics and
    marketing cookies. True only once GA4/GTM is added (old site ran GTM-WXNFQGQH;
    the new site has NO tracking). Either add GA4/GTM before/at launch or revise

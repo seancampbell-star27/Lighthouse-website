@@ -1,4 +1,4 @@
-*Last updated: January 24, 2024*
+*Last updated: November 23, 2026*
 
 This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
 
@@ -16,7 +16,7 @@ For the purposes of this Privacy Policy:
 
 - **Account** means a unique account created for You to access our Service or parts of our Service.
 - **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Lighthouse Digital Media LLC, One Lincoln Street 24th Floor Boston, MA 02111.
+- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Lighthouse Digital Media LLC, 399 Boylston Street, 6th Floor, Boston, MA 02116.
 - **Cookies** are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.
 - **Country** refers to: Massachusetts, United States
 - **Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.
