@@ -90,11 +90,20 @@ const SECURITY_HEADERS = {
   'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
   // Astro inlines small scripts/styles, so 'unsafe-inline' is required.
+  // Google Tag Manager + GA4 (+ GTM Preview mode) domains per Google's CSP
+  // guidance. Any NON-Google tag added in GTM needs its domains added here too,
+  // or it will silently fail to load.
   'Content-Security-Policy':
-    "default-src 'self'; script-src 'self' 'unsafe-inline'; " +
-    "style-src 'self' 'unsafe-inline'; img-src 'self' data:; " +
-    "font-src 'self'; connect-src 'self'; frame-ancestors 'none'; " +
-    "frame-src https://lookerstudio.google.com https://datastudio.google.com; " +
+    "default-src 'self'; " +
+    "script-src 'self' 'unsafe-inline' https://*.googletagmanager.com https://tagmanager.google.com; " +
+    "style-src 'self' 'unsafe-inline' https://tagmanager.google.com https://fonts.googleapis.com; " +
+    "img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com " +
+    "https://ssl.gstatic.com https://www.gstatic.com https://*.g.doubleclick.net https://www.google.com; " +
+    "font-src 'self' data: https://fonts.gstatic.com; " +
+    "connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com " +
+    "https://*.googletagmanager.com https://*.g.doubleclick.net https://www.google.com; " +
+    "frame-ancestors 'none'; " +
+    "frame-src https://lookerstudio.google.com https://datastudio.google.com https://*.googletagmanager.com; " +
     "base-uri 'self'; form-action 'self'",
 };
 

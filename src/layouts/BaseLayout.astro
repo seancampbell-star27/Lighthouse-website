@@ -32,6 +32,25 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    {/*
+      Google Tag Manager (GTM-WXNFQGQH — same container as the old site; holds the
+      GA4 Google tag G-WWJRM3KGZP). Loads ONLY on the production domain so staging
+      (workers.dev) and local dev never send analytics. CSP for Google's domains
+      lives in worker/index.js — update it if non-Google tags are added in GTM.
+    */}
+    <script is:inline>
+      (function (w, d, s, l, i) {
+        if (!/(^|\.)lighthousedigitalmedia\.net$/.test(w.location.hostname)) return;
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-WXNFQGQH');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />

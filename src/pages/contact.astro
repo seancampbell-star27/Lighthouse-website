@@ -179,6 +179,9 @@ import { SITE } from '../config/site';
       });
       if (res.ok) {
         form.reset();
+        // Analytics: GTM custom event for lead tracking (no form contents/PII sent).
+        const w = window as unknown as { dataLayer?: Record<string, unknown>[] };
+        (w.dataLayer = w.dataLayer || []).push({ event: 'contact_form_submit' });
         status.textContent = 'Thanks — your message is on its way. We’ll reply within one business day.';
         status.classList.add('is-success');
       } else {

@@ -163,7 +163,11 @@ NO hero watermark, NO spinning-values graphic (Sean removed both 7/10/26).
    marketing cookies. True only once GA4/GTM is added (old site ran GTM-WXNFQGQH;
    the new site has NO tracking). Either add GA4/GTM before/at launch or revise
    that section.
-   Sean 11/23/26: GTM + GA4 will be added soon — keep the text as-is. When adding,
+   DONE 11/25/26: GTM-WXNFQGQH (old site's container; GA4 G-WWJRM3KGZP) added
+   in BaseLayout, loads ONLY on *.lighthousedigitalmedia.net (not staging). The
+   contact form pushes dataLayer event `contact_form_submit` on success (no PII).
+   CSP in worker/index.js now allows GTM/GA4/Preview domains.
+   Sean 11/23/26 (original note): GTM + GA4 will be added soon — keep the text as-is. When adding,
    GTM/GA domains must be added to the CSP in `worker/index.js` (script-src,
    connect-src, img-src) or tags will silently fail.
 
